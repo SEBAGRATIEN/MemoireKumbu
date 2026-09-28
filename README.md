@@ -194,6 +194,6 @@ Le template inclut un bouton de changement de thème (clair / sombre) et un menu
 ## Auteur
 
 **Nzayituriki Habyarimana Gracieux**
-Étudiant en L1 — Réseaux et Télécommunications
+Étudiant à l'ISTA-GOMA
 
 © 2026 Kumbu — Tous droits réservés
