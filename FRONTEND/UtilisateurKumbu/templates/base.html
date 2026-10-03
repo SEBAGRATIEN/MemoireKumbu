@@ -13,7 +13,7 @@
             <p class="lead">Recherchez un livre, sauvegardez-le, et posez toutes vos questions à l'assistant Kumbu pour approfondir votre lecture.</p>
             <div class="search-bar">
             <input type="text" placeholder="Rechercher un livre, un auteur, un sujet…">
-            <button class="btn btn-primary" data-page="recherche">Rechercher</button>
+            <a href="{% url 'recherche' %}" class="btn btn-primary">Rechercher</a>
             </div>
             <p class="stat-line">Rejoint par plus de <strong>12 400</strong> apprenants</p>
         </div>
@@ -23,7 +23,7 @@
         <div class="container">
             <div class="section-head">
             <h2>Récemment rejoint</h2>
-            <p><a href="#" data-page="recherche">Voir la communauté</a></p>
+            <p><a href="{% url 'recherche' %}">Voir la communauté</a></p>
             </div>
             <div class="grid grid-3">
             <div class="card profile-card">
@@ -46,7 +46,7 @@
         <div class="container">
             <div class="section-head">
             <h2>Actualités</h2>
-            <p><a href="#" data-page="recherche">Tous les livres</a></p>
+            <p><a href="{% url 'recherche' %}">Tous les livres</a></p>
             </div>
             <div class="grid grid-4">
             <div class="book-card">
@@ -74,4 +74,5 @@
         </div>
 
     </section>
-{% endblock  %}  
+    </main>
+{% endblock  %}

@@ -26,22 +26,21 @@
       </div>
       <div class="footer-col">
         <h4>Navigation</h4>
-        <a href="#" data-page="accueil">Accueil</a>
-        <a href="#" data-page="apropos">À propos</a>
-        <a href="#" data-page="contact">Contact</a>
-        <a href="#" data-page="recherche">Catégories</a>
+        <a href="{% url 'base' %}">Accueil</a>
+        <a href="{% url 'propos' %}">À propos</a>
+        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'recherche' %}">Catégories</a>
       </div>
       <div class="footer-col">
         <h4>Compte</h4>
-        <a href="{% url "mon_profil" %}" data-page="profil">Mon profil</a>
-        <a href="#" data-page="connexion">Connexion</a>
-        <a href="#">Déconnexion</a>
+        <a href="{% url 'mon_profil' %}">Mon profil</a>
+        <a href="{% url 'deconnexion' %}">Déconnexion</a>
       </div>
       <div class="footer-col">
         <h4>Ressources</h4>
-        <a href="#">Centre d'aide</a>
-        <a href="#">Conditions d'utilisation</a>
-        <a href="#">Politique de confidentialité</a>
+        <a href="{% url 'centre_aide' %}">Centre d'aide</a>
+        <a href="{% url 'conditions' %}">Conditions d'utilisation</a>
+        <a href="{% url 'politiques' %}">Politique de confidentialité</a>
       </div>
     </div>
     <div class="footer-bottom">

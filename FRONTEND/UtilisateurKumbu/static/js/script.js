@@ -1,47 +1,13 @@
 /* =====================================================
    KUMBU — script du template statique
-   Navigation entre pages, thème clair/sombre, menu mobile
+   Thème clair/sombre, menu mobile, onglets, assistant IA
    ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* ---------- Navigation entre pages ---------- */
-  var pages = document.querySelectorAll(".page");
-  var navLinks = document.querySelectorAll("[data-page]");
+  /* ---------- Menu mobile (hamburger) ---------- */
   var mainNav = document.getElementById("mainNav");
   var hamburger = document.getElementById("navToggle");
-
-  function showPage(name) {
-    pages.forEach(function (page) {
-      page.classList.toggle("active", page.id === "page-" + name);
-    });
-    navLinks.forEach(function (link) {
-      link.classList.toggle("active", link.dataset.page === name);
-    });
-    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
-  }
-
-  navLinks.forEach(function (link) {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      showPage(link.dataset.page);
-      if (mainNav && mainNav.classList.contains("open")) {
-        closeMobileNav();
-      }
-    });
-  });
-
-  /* Page de départ : on respecte un éventuel #ancre dans l'URL */
-  var initial = window.location.hash ? window.location.hash.replace("#", "") : "accueil";
-  if (!document.getElementById("page-" + initial)) initial = "accueil";
-  showPage(initial);
-
-  /* ---------- Menu mobile (hamburger) ---------- */
-  function closeMobileNav() {
-    mainNav.classList.remove("open");
-    hamburger.classList.remove("open");
-    hamburger.setAttribute("aria-expanded", "false");
-  }
 
   if (hamburger && mainNav) {
     hamburger.addEventListener("click", function () {

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 def base(request):
@@ -21,6 +21,12 @@ def mon_profil(request):
 
 def connexion(request):
     return render(request, 'connexion/login.html')
+
+def deconnexion(request):
+    # TODO : brancher ici la vraie déconnexion Django, par exemple :
+    # from django.contrib.auth import logout
+    # logout(request)
+    return redirect('connexion')
 
 def centre_aide(request):
     return render(request, 'centre_aide/aide.html')
