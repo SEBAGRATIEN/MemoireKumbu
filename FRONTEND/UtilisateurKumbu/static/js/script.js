@@ -10,10 +10,26 @@ document.addEventListener("DOMContentLoaded", function () {
   var hamburger = document.getElementById("navToggle");
 
   if (hamburger && mainNav) {
+    function closeMenu() {
+      mainNav.classList.remove("open");
+      hamburger.classList.remove("open");
+      hamburger.setAttribute("aria-expanded", "false");
+    }
+
     hamburger.addEventListener("click", function () {
       var isOpen = mainNav.classList.toggle("open");
       hamburger.classList.toggle("open", isOpen);
       hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    // Fermer proprement le menu après avoir choisi une page.
+    mainNav.querySelectorAll(".nav-link, .nav-utils a").forEach(function (link) {
+      link.addEventListener("click", closeMenu);
+    });
+
+    // Fermer avec Échap.
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeMenu();
     });
   }
 

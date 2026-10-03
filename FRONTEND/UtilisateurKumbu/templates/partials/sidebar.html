@@ -2,15 +2,14 @@
   <div class="header-inner">
     <a href="{% url 'base' %}" class="logo">Kum<span>bu</span></a>
 
-    <!-- Sur petit écran, tout ce bloc (liens + thème + déconnexion) devient le panneau du hamburger -->
     <nav class="main-nav" id="mainNav">
       <div class="nav-links">
-        <a href="{% url 'base' %}" class="nav-link active">Accueil</a>
-        <a href="{% url 'propos' %}" class="nav-link">À propos</a>
-        <a href="{% url 'recherche' %}" class="nav-link">Recherche</a>
-        <a href="{% url 'assistant' %}" class="nav-link">Assistant IA</a>
-        <a href="{% url 'contact' %}" class="nav-link">Contact</a>
-        <a href="{% url 'mon_profil' %}" class="nav-link">Mon profil</a>
+        <a href="{% url 'base' %}" class="nav-link {% if request.resolver_match.url_name == 'base' %}active{% endif %}">Accueil</a>
+        <a href="{% url 'propos' %}" class="nav-link {% if request.resolver_match.url_name == 'propos' %}active{% endif %}">À propos</a>
+        <a href="{% url 'recherche' %}" class="nav-link {% if request.resolver_match.url_name == 'recherche' %}active{% endif %}">Recherche</a>
+        <a href="{% url 'assistant' %}" class="nav-link {% if request.resolver_match.url_name == 'assistant' %}active{% endif %}">Assistant IA</a>
+        <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
+        <a href="{% url 'mon_profil' %}" class="nav-link {% if request.resolver_match.url_name == 'mon_profil' %}active{% endif %}">Mon profil</a>
       </div>
       <div class="nav-utils">
         {% include "partials/theme_swicth.html" %}
@@ -18,7 +17,7 @@
       </div>
     </nav>
 
-    <button class="hamburger" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+    <button class="hamburger" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" type="button">
       <span></span><span></span><span></span>
     </button>
   </div>
