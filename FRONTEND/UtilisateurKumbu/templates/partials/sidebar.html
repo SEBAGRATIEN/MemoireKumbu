@@ -1,0 +1,21 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a href="{% url 'base' %}" class="logo" data-page="accueil">Kum<span>bu</span></a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="{% url 'base' %}" class="nav-link active" data-page="accueil">Accueil</a>
+      <a href={% url "propos" %} class="nav-link" data-page="apropos">À propos</a>
+      <a href="{% url 'recherche' %}" class="nav-link" data-page="recherche">Recherche</a>
+      <a href="{% url 'assistant' %}" class="nav-link" data-page="ia">Assistant IA</a>
+      <a href="{% url 'contact' %}" class="nav-link" data-page="contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+        {% include "partials/theme_swicth.html" %}
+        <a href="#" class="btn btn-primary" data-page="connexion">Connexion</a>
+        <button class="hamburger" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+        </button>
+    </div>
+  </div>
+</header>

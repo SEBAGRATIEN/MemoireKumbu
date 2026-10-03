@@ -1,5 +1,32 @@
 from django.shortcuts import render
 
 # Create your views here.
-def home(request):
-    return render(request, 'home.html')
+def base(request):
+    return render(request, 'base.html')
+
+def propos(request):
+    return render(request, 'propos/info.html') 
+
+def recherche(request):
+    return render(request, 'recherche/recherche.html') 
+
+def assistant(request):
+    return render(request, 'assistant/discussion.html') 
+
+def contact(request):
+    return render(request, 'contact/contact.html') 
+
+def mon_profil(request):
+    return render(request, 'mon_profil/profil.html')
+
+def connexion(request):
+    return render(request, 'connexion/login.html')
+
+def centre_aide(request):
+    return render(request, 'centre_aide/aide.html')
+
+def politiques(request):
+    return render(request, 'politiques/politiques.html')
+
+def conditions(request):
+    return render(request, 'conditions/condition.html')

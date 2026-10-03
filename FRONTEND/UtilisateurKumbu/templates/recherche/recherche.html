@@ -1,0 +1,31 @@
+{% extends "home.html" %} 
+
+{% block title %}Kumbu | recherche{% endblock %}
+
+{% block content %}
+  <section id="page-recherche" class="page">
+    <div class="page-header">
+      <div class="container">
+        <h1>Recherche</h1>
+        <div class="search-bar" style="margin:20px 0 0">
+          <input type="text" placeholder="Rechercher un livre, un auteur, un sujet…">
+          <button class="btn btn-primary">Rechercher</button>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container">
+        <div class="grid grid-4">
+          <div class="book-card"><div class="cover"></div><h3>Réseaux et télécommunications</h3><p class="author">A. Mwamba</p></div>
+          <div class="book-card"><div class="cover"></div><h3>Introduction à l'algèbre</h3><p class="author">D. Tshibangu</p></div>
+          <div class="book-card"><div class="cover"></div><h3>Systèmes d'exploitation</h3><p class="author">R. Kanyinda</p></div>
+          <div class="book-card"><div class="cover"></div><h3>Bases de données relationnelles</h3><p class="author">P. Ilunga</p></div>
+          <div class="book-card"><div class="cover"></div><h3>Physique générale</h3><p class="author">S. Kalonji</p></div>
+          <div class="book-card"><div class="cover"></div><h3>Comptabilité générale</h3><p class="author">M. Lumbala</p></div>
+          <div class="book-card"><div class="cover"></div><h3>Droit civil congolais</h3><p class="author">C. Mukendi</p></div>
+          <div class="book-card"><div class="cover"></div><h3>Écologie et environnement</h3><p class="author">F. Bope</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

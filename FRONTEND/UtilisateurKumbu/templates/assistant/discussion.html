@@ -1,0 +1,25 @@
+{% extends "home.html" %}  
+
+{% block title %}Assistant | kumbu{% endblock %}
+
+{% block content %}
+  <section id="page-ia" class="page">
+    <div class="page-header">
+      <div class="container">
+        <h1>Assistant IA Kumbu</h1>
+        <p>Posez vos questions sur un livre ou un sujet ; l'assistant vous répond à partir de ce que vous avez lu.</p>
+      </div>
+    </div>
+    <div class="chat-shell">
+      <div class="chat-window" id="chatWindow">
+        <div class="msg msg-bot">Bonjour ! Sur quel livre ou quel sujet souhaitez-vous que je vous aide aujourd'hui ?</div>
+        <div class="msg msg-user">Peux-tu me résumer le chapitre sur les protocoles réseau ?</div>
+        <div class="msg msg-bot">Bien sûr — dites-moi d'abord quel livre vous consultez et je m'appuierai dessus pour répondre.</div>
+      </div>
+      <form class="chat-input" id="chatForm">
+        <input type="text" placeholder="Écrivez votre question…" autocomplete="off">
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+      </form>
+    </div>
+  </section>
+{% endblock  %}  

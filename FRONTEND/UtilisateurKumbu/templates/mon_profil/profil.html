@@ -1,0 +1,40 @@
+{% extends "home.html" %}
+{% block title %}Mon profil | kumbu{% endblock  %}  
+{% block content %}
+  <section id="page-profil" class="page">
+    <div class="container">
+      <div class="profile-header">
+        <div class="avatar-lg">NH</div>
+        <div>
+          <h2 style="margin-bottom:4px">Nzayituriki Habyarimana Gracieux</h2>
+          <p style="margin:0">Étudiant — L1 Réseaux et télécommunications</p>
+        </div>
+        <a href="#" class="btn btn-outline" style="margin-left:auto">Modifier le profil</a>
+      </div>
+
+      <div class="section" style="padding-bottom:0">
+        <div class="tabs-secondary">
+          <span class="active">Informations</span>
+          <span>Mes livres publiés</span>
+          <span>Livres lus</span>
+          <span>Paramètres</span>
+        </div>
+
+        <div class="grid grid-3" style="margin-bottom:40px">
+          <div class="card">
+            <h3>Identité</h3>
+            <p>Nom, post-nom, prénom, photo de profil — modifiables depuis cet onglet.</p>
+          </div>
+          <div class="card">
+            <h3>Mot de passe</h3>
+            <p>Modifier le mot de passe associé au compte.</p>
+          </div>
+          <div class="card">
+            <h3>Thème</h3>
+            <p>Basculer entre le thème clair et le thème sombre de l'application.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock  %}  

@@ -2,300 +2,19 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kumbu — Votre bibliothèque, augmentée par l'IA</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Kumbu — Votre bibliothèque{% endblock  %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_css %}{% endblock %}
 </head>
 <body>
 
-<!-- ==================== EN-TÊTE ==================== -->
-<header class="site-header">
-  <div class="header-inner">
-    <a href="#" class="logo" data-page="accueil">Kum<span>bu</span></a>
-
-    <nav class="main-nav" id="mainNav">
-      <a href="#" class="nav-link active" data-page="accueil">Accueil</a>
-      <a href="#" class="nav-link" data-page="apropos">À propos</a>
-      <a href="#" class="nav-link" data-page="recherche">Recherche</a>
-      <a href="#" class="nav-link" data-page="ia">Assistant IA</a>
-      <a href="#" class="nav-link" data-page="contact">Contact</a>
-    </nav>
-
-    <div class="header-actions">
-      <button class="icon-btn" id="themeToggle" aria-label="Changer de thème">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
-      </button>
-      <a href="#" class="btn btn-primary" data-page="connexion">Connexion</a>
-      <button class="hamburger" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</header>
-
-<main>
-
-  <!-- ==================== PAGE ACCUEIL ==================== -->
-  <section id="page-accueil" class="page active">
-
-    <div class="hero">
-      <div class="container">
-        <h1>Votre bibliothèque,<br>augmentée par l'IA</h1>
-        <p class="lead">Recherchez un livre, sauvegardez-le, et posez toutes vos questions à l'assistant Kumbu pour approfondir votre lecture.</p>
-        <div class="search-bar">
-          <input type="text" placeholder="Rechercher un livre, un auteur, un sujet…">
-          <button class="btn btn-primary" data-page="recherche">Rechercher</button>
-        </div>
-        <p class="stat-line">Rejoint par plus de <strong>12 400</strong> apprenants</p>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="container">
-        <div class="section-head">
-          <h2>Récemment rejoint</h2>
-          <p><a href="#" data-page="recherche">Voir la communauté</a></p>
-        </div>
-        <div class="grid grid-3">
-          <div class="card profile-card">
-            <div class="avatar">EM</div>
-            <div><div class="name">Esther Mbuyi</div><div class="role">Étudiante — L2 Informatique</div></div>
-          </div>
-          <div class="card profile-card">
-            <div class="avatar">JK</div>
-            <div><div class="name">Joël Kabeya</div><div class="role">Chercheur indépendant</div></div>
-          </div>
-          <div class="card profile-card">
-            <div class="avatar">NH</div>
-            <div><div class="name">Nzayituriki H.</div><div class="role">Étudiant — L1 Réseaux et télécoms</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section" style="background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
-      <div class="container">
-        <div class="section-head">
-          <h2>Actualités</h2>
-          <p><a href="#" data-page="recherche">Tous les livres</a></p>
-        </div>
-        <div class="grid grid-4">
-          <div class="book-card">
-            <div class="cover"></div>
-            <h3>Réseaux et télécommunications</h3>
-            <p class="author">A. Mwamba</p>
-          </div>
-          <div class="book-card">
-            <div class="cover"></div>
-            <h3>Introduction à l'algèbre</h3>
-            <p class="author">D. Tshibangu</p>
-          </div>
-          <div class="book-card">
-            <div class="cover"></div>
-            <h3>Systèmes d'exploitation</h3>
-            <p class="author">R. Kanyinda</p>
-          </div>
-          <div class="book-card">
-            <div class="cover"></div>
-            <h3>Bases de données relationnelles</h3>
-            <p class="author">P. Ilunga</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- ==================== PAGE À PROPOS ==================== -->
-  <section id="page-apropos" class="page">
-    <div class="page-header">
-      <div class="container">
-        <h1>À propos de Kumbu</h1>
-        <p style="max-width:640px">Kumbu est une plateforme numérique conçue pour les étudiants, les apprenants et les chercheurs, qui permet de sauvegarder et de partager des livres, et de dialoguer avec un assistant IA pour approfondir chaque lecture.</p>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container two-col">
-        <div>
-          <h2>Notre mission</h2>
-          <p>Rassembler en un seul endroit la recherche documentaire, l'apprentissage assisté par IA et la gestion académique par promotion, pour tous les établissements d'enseignement supérieur de la RDC.</p>
-          <h2>Comment ça marche</h2>
-          <p>Un utilisateur simple recherche des livres et échange avec l'IA. Un étudiant rattaché à son établissement retrouve en plus les cours et supports de sa promotion, dans un espace protégé par un identifiant annuel.</p>
-        </div>
-        <div class="card">
-          <h3>En chiffres</h3>
-          <ul class="info-list">
-            <li><span class="label">Apprenants</span> 12 400+</li>
-            <li><span class="label">Livres</span> 3 200+</li>
-            <li><span class="label">Établissements</span> 18</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== PAGE RECHERCHE / LIVRES ==================== -->
-  <section id="page-recherche" class="page">
-    <div class="page-header">
-      <div class="container">
-        <h1>Recherche</h1>
-        <div class="search-bar" style="margin:20px 0 0">
-          <input type="text" placeholder="Rechercher un livre, un auteur, un sujet…">
-          <button class="btn btn-primary">Rechercher</button>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="grid grid-4">
-          <div class="book-card"><div class="cover"></div><h3>Réseaux et télécommunications</h3><p class="author">A. Mwamba</p></div>
-          <div class="book-card"><div class="cover"></div><h3>Introduction à l'algèbre</h3><p class="author">D. Tshibangu</p></div>
-          <div class="book-card"><div class="cover"></div><h3>Systèmes d'exploitation</h3><p class="author">R. Kanyinda</p></div>
-          <div class="book-card"><div class="cover"></div><h3>Bases de données relationnelles</h3><p class="author">P. Ilunga</p></div>
-          <div class="book-card"><div class="cover"></div><h3>Physique générale</h3><p class="author">S. Kalonji</p></div>
-          <div class="book-card"><div class="cover"></div><h3>Comptabilité générale</h3><p class="author">M. Lumbala</p></div>
-          <div class="book-card"><div class="cover"></div><h3>Droit civil congolais</h3><p class="author">C. Mukendi</p></div>
-          <div class="book-card"><div class="cover"></div><h3>Écologie et environnement</h3><p class="author">F. Bope</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== PAGE ASSISTANT IA ==================== -->
-  <section id="page-ia" class="page">
-    <div class="page-header">
-      <div class="container">
-        <h1>Assistant IA Kumbu</h1>
-        <p>Posez vos questions sur un livre ou un sujet ; l'assistant vous répond à partir de ce que vous avez lu.</p>
-      </div>
-    </div>
-    <div class="chat-shell">
-      <div class="chat-window" id="chatWindow">
-        <div class="msg msg-bot">Bonjour ! Sur quel livre ou quel sujet souhaitez-vous que je vous aide aujourd'hui ?</div>
-        <div class="msg msg-user">Peux-tu me résumer le chapitre sur les protocoles réseau ?</div>
-        <div class="msg msg-bot">Bien sûr — dites-moi d'abord quel livre vous consultez et je m'appuierai dessus pour répondre.</div>
-      </div>
-      <form class="chat-input" id="chatForm">
-        <input type="text" placeholder="Écrivez votre question…" autocomplete="off">
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- ==================== PAGE CONTACT ==================== -->
-  <section id="page-contact" class="page">
-    <div class="page-header">
-      <div class="container">
-        <h1>Contact</h1>
-        <p>Pour toute question professionnelle ou proposition de collaboration.</p>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container two-col">
-        <form class="card">
-          <div class="field"><label for="c-nom">Nom complet</label><input id="c-nom" type="text" placeholder="Votre nom"></div>
-          <div class="field"><label for="c-email">Adresse e-mail</label><input id="c-email" type="email" placeholder="vous@exemple.com"></div>
-          <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" placeholder="Votre message…"></textarea></div>
-          <button type="submit" class="btn btn-primary btn-block">Envoyer le message</button>
-        </form>
-        <div>
-          <h3>Informations</h3>
-          <ul class="info-list">
-            <li><span class="label">E-mail</span> contact@kumbu.app</li>
-            <li><span class="label">Réponse</span> sous 48 heures</li>
-            <li><span class="label">Objet</span> demandes professionnelles uniquement</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== PAGE CONNEXION / INSCRIPTION ==================== -->
-  <section id="page-connexion" class="page">
-    <div class="auth-wrap">
-      <div class="auth-card">
-        <div style="text-align:center; margin-bottom:22px;">
-          <div class="logo" style="justify-content:center">Kum<span>bu</span></div>
-        </div>
-
-        <div class="auth-tabs">
-          <div class="auth-tab active" data-form="connexion">Se connecter</div>
-          <div class="auth-tab" data-form="inscription">Créer un compte</div>
-        </div>
-
-        <!-- Formulaire : Se connecter -->
-        <form class="auth-form active" id="form-connexion">
-          <div class="field"><label for="lc-nom">Nom</label><input id="lc-nom" type="text" placeholder="Votre nom"></div>
-          <div class="field"><label for="lc-mdp">Mot de passe</label><input id="lc-mdp" type="password" placeholder="••••••••"></div>
-          <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
-        </form>
-
-        <!-- Formulaire : Créer un compte -->
-        <form class="auth-form" id="form-inscription">
-          <div class="two-fields">
-            <div class="field"><label for="li-nom">Nom</label><input id="li-nom" type="text" placeholder="Nom"></div>
-            <div class="field"><label for="li-postnom">Post-nom</label><input id="li-postnom" type="text" placeholder="Post-nom"></div>
-          </div>
-          <div class="field"><label for="li-prenom">Prénom</label><input id="li-prenom" type="text" placeholder="Prénom"></div>
-          <div class="field"><label for="li-mdp1">Mot de passe</label><input id="li-mdp1" type="password" placeholder="••••••••"></div>
-          <div class="field"><label for="li-mdp2">Confirmer le mot de passe</label><input id="li-mdp2" type="password" placeholder="••••••••"></div>
-          <button type="submit" class="btn btn-primary btn-block">Créer mon compte</button>
-        </form>
-
-        <div class="auth-divider">ou</div>
-
-        <a href="#" class="student-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10 12 4 2 10l10 6 10-6Z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
-          Se connecter en tant qu'étudiant
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== PAGE MON PROFIL ==================== -->
-  <section id="page-profil" class="page">
-    <div class="container">
-      <div class="profile-header">
-        <div class="avatar-lg">NH</div>
-        <div>
-          <h2 style="margin-bottom:4px">Nzayituriki Habyarimana Gracieux</h2>
-          <p style="margin:0">Étudiant — L1 Réseaux et télécommunications</p>
-        </div>
-        <a href="#" class="btn btn-outline" style="margin-left:auto">Modifier le profil</a>
-      </div>
-
-      <div class="section" style="padding-bottom:0">
-        <div class="tabs-secondary">
-          <span class="active">Informations</span>
-          <span>Mes livres publiés</span>
-          <span>Livres lus</span>
-          <span>Paramètres</span>
-        </div>
-
-        <div class="grid grid-3" style="margin-bottom:40px">
-          <div class="card">
-            <h3>Identité</h3>
-            <p>Nom, post-nom, prénom, photo de profil — modifiables depuis cet onglet.</p>
-          </div>
-          <div class="card">
-            <h3>Mot de passe</h3>
-            <p>Modifier le mot de passe associé au compte.</p>
-          </div>
-          <div class="card">
-            <h3>Thème</h3>
-            <p>Basculer entre le thème clair et le thème sombre de l'application.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
+{% include "partials/sidebar.html" %}
+{% block content %}{% endblock %}
 
 <!-- ==================== PIED DE PAGE ==================== -->
 <footer class="site-footer">
@@ -314,7 +33,7 @@
       </div>
       <div class="footer-col">
         <h4>Compte</h4>
-        <a href="#" data-page="profil">Mon profil</a>
+        <a href="{% url "mon_profil" %}" data-page="profil">Mon profil</a>
         <a href="#" data-page="connexion">Connexion</a>
         <a href="#">Déconnexion</a>
       </div>
@@ -332,7 +51,7 @@
   </div>
 </footer>
 
-<script src="{% static 'js/script.js' %}"></script>
-
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block extra_js %}{% endblock %}
 </body>
 </html>

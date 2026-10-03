@@ -1,0 +1,42 @@
+{% extends "home.html" %}
+{% block title %}Conneion | kumbu{% endblock %}
+ <section id="page-connexion" class="page">
+    <div class="auth-wrap">
+      <div class="auth-card">
+        <div style="text-align:center; margin-bottom:22px;">
+          <div class="logo" style="justify-content:center">Kum<span>bu</span></div>
+        </div>
+
+        <div class="auth-tabs">
+          <div class="auth-tab active" data-form="connexion">Se connecter</div>
+          <div class="auth-tab" data-form="inscription">Créer un compte</div>
+        </div>
+
+        <!-- Formulaire : Se connecter -->
+        <form class="auth-form active" id="form-connexion">
+          <div class="field"><label for="lc-nom">Nom</label><input id="lc-nom" type="text" placeholder="Votre nom"></div>
+          <div class="field"><label for="lc-mdp">Mot de passe</label><input id="lc-mdp" type="password" placeholder="••••••••"></div>
+          <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+        </form>
+
+        <!-- Formulaire : Créer un compte -->
+        <form class="auth-form" id="form-inscription">
+          <div class="two-fields">
+            <div class="field"><label for="li-nom">Nom</label><input id="li-nom" type="text" placeholder="Nom"></div>
+            <div class="field"><label for="li-postnom">Post-nom</label><input id="li-postnom" type="text" placeholder="Post-nom"></div>
+          </div>
+          <div class="field"><label for="li-prenom">Prénom</label><input id="li-prenom" type="text" placeholder="Prénom"></div>
+          <div class="field"><label for="li-mdp1">Mot de passe</label><input id="li-mdp1" type="password" placeholder="••••••••"></div>
+          <div class="field"><label for="li-mdp2">Confirmer le mot de passe</label><input id="li-mdp2" type="password" placeholder="••••••••"></div>
+          <button type="submit" class="btn btn-primary btn-block">Créer mon compte</button>
+        </form>
+
+        <div class="auth-divider">ou</div>
+
+        <a href="#" class="student-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10 12 4 2 10l10 6 10-6Z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>
+          Se connecter en tant qu'étudiant
+        </a>
+      </div>
+    </div>
+  </section>

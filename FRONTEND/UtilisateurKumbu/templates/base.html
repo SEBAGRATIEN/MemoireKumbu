@@ -1,0 +1,77 @@
+{% extends "home.html" %}
+{% block title %}Kumbu — Votre bibliothèque{% endblock  %}
+
+{% block content %}
+    <main>
+
+    <!-- ==================== PAGE ACCUEIL ==================== -->
+    <section id="page-accueil" class="page active">
+
+        <div class="hero">
+        <div class="container">
+            <h1>Votre bibliothèque,<br>augmentée par l'IA</h1>
+            <p class="lead">Recherchez un livre, sauvegardez-le, et posez toutes vos questions à l'assistant Kumbu pour approfondir votre lecture.</p>
+            <div class="search-bar">
+            <input type="text" placeholder="Rechercher un livre, un auteur, un sujet…">
+            <button class="btn btn-primary" data-page="recherche">Rechercher</button>
+            </div>
+            <p class="stat-line">Rejoint par plus de <strong>12 400</strong> apprenants</p>
+        </div>
+        </div>
+
+        <div class="section">
+        <div class="container">
+            <div class="section-head">
+            <h2>Récemment rejoint</h2>
+            <p><a href="#" data-page="recherche">Voir la communauté</a></p>
+            </div>
+            <div class="grid grid-3">
+            <div class="card profile-card">
+                <div class="avatar">EM</div>
+                <div><div class="name">Esther Mbuyi</div><div class="role">Étudiante — L2 Informatique</div></div>
+            </div>
+            <div class="card profile-card">
+                <div class="avatar">JK</div>
+                <div><div class="name">Joël Kabeya</div><div class="role">Chercheur indépendant</div></div>
+            </div>
+            <div class="card profile-card">
+                <div class="avatar">NH</div>
+                <div><div class="name">Nzayituriki H.</div><div class="role">Étudiant — L1 Réseaux et télécoms</div></div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="section" style="background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+        <div class="container">
+            <div class="section-head">
+            <h2>Actualités</h2>
+            <p><a href="#" data-page="recherche">Tous les livres</a></p>
+            </div>
+            <div class="grid grid-4">
+            <div class="book-card">
+                <div class="cover"></div>
+                <h3>Réseaux et télécommunications</h3>
+                <p class="author">A. Mwamba</p>
+            </div>
+            <div class="book-card">
+                <div class="cover"></div>
+                <h3>Introduction à l'algèbre</h3>
+                <p class="author">D. Tshibangu</p>
+            </div>
+            <div class="book-card">
+                <div class="cover"></div>
+                <h3>Systèmes d'exploitation</h3>
+                <p class="author">R. Kanyinda</p>
+            </div>
+            <div class="book-card">
+                <div class="cover"></div>
+                <h3>Bases de données relationnelles</h3>
+                <p class="author">P. Ilunga</p>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    </section>
+{% endblock  %}  
