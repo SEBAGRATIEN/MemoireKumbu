@@ -116,10 +116,33 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = '/static/'
-#STATICFILES_DIRS = 
+STATIC_URL = 'static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "show_ui_builder": True,
+    "site_title": "Kumbu Admin",
+    "site_header": "Kumbu Admin",
+    "site_brand": "Kumbu Administation",
+    "site_logo": "img/logo.jpeg",
+    "custom_css": "admin/css/style.css",
+    }
+
+#JAZZMIN_UI_TUNES = {
+    #"theme": "flatly", 
+    #"navbar": "navbar-white navbar-light",
+    #"sidebar": "sidebar-light-primary",}
+    #"brand_colour": "navbar-white",
+    #"no_navbar_border": False,
+    #"sidebar_nav_child_indent": True,#
