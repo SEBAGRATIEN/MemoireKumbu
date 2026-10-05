@@ -102,5 +102,76 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 300);
     });
   }
+  /* ---------- Connexion avec Google ---------- */
+  var googleLogin = document.getElementById("google-login");
+  var googleError = document.getElementById("google-error");
 
+  if (googleLogin) {
+    googleLogin.addEventListener("click", async function () {
+
+      googleLogin.disabled = true;
+      googleLogin.style.opacity = "0.7";
+
+      if (googleError) {
+        googleError.style.display = "none";
+        googleError.textContent = "";
+      }
+
+      try {
+        const { auth, provider, signInWithPopup } = window.kumbuFirebase;
+
+        const result = await signInWithPopup(auth, provider);
+
+        const idToken = await result.user.getIdToken();
+
+        const response = await fetch("/connexion/google/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCookie("csrftoken")
+          },
+          body: JSON.stringify({
+            id_token: idToken
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || "La connexion a échoué.");
+        }
+
+        window.location.href = data.redirect_url;
+
+      } catch (error) {
+
+        console.error("Connexion Google :", error);
+
+        if (googleError) {
+          googleError.textContent =
+            error.message || "Impossible de se connecter avec Google.";
+          googleError.style.display = "block";
+        }
+
+      } finally {
+        googleLogin.disabled = false;
+        googleLogin.style.opacity = "1";
+      }
+    });
+  }
+
+  /* ---------- Récupération du cookie CSRF Django ---------- */
+  function getCookie(name) {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+
+      if (cookie.substring(0, name.length + 1) === name + "=") {
+        return decodeURIComponent(cookie.substring(name.length + 1));
+      }
+    }
+
+    return null;
+  }
 });

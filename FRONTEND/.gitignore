@@ -62,3 +62,12 @@ db.sqlite3-journal
 *.sw?
 .DS_Store
 Thumbs.db
+firebase-service-account.json
+# Ignorer l'environnement virtuel
+FRONTEND/venv/
+venv/
+
+# Ignorer le fichier de configuration Firebase secret
+FRONTEND/firebase-servise-account.json
+firebase-servise-account.json
+venv/

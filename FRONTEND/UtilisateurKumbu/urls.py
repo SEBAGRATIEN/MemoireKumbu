@@ -17,5 +17,6 @@ urlpatterns = [
     path('conditions/', views.conditions, name='conditions'),
 
     path('connexion/', views.connexion, name='connexion'),
+    path('connexion/google/', views.connexion_google, name='connexion_google'),
     path('deconnexion/', views.deconnexion, name='deconnexion'),
 ]    
