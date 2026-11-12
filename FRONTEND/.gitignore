@@ -1,0 +1,211 @@
+@"
+# ==========================================
+# 1. SYSTEMES D'EXPLOITATION (Windows, Mac, Linux)
+# ==========================================
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ==========================================
+# 2. EDITEURS DE CODE & IDE (VS Code, JetBrains, etc.)
+# ==========================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.iml
+*.ipr
+*.iws
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ==========================================
+# 3. FICHIERS SENSIBLES, SECRETS & ENVIRONNEMENT
+# ==========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets.json
+config.local.*
+credentials.json
+
+# ==========================================
+# 4. LOGS, CACHES & FICHIERS TEMPORAIRES
+# ==========================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+logs/
+*.tmp
+*.temp
+*.bak
+*.swp
+*.cache
+.cache/
+temp/
+tmp/
+
+# ==========================================
+# 5. NODE.JS / JAVASCRIPT / REACT / VUE / NEXT
+# ==========================================
+node_modules/
+jspm_packages/
+bower_components/
+.npm
+.eslintcache
+.stylelintcache
+.next/
+out/
+.nuxt/
+dist/
+build/
+.output/
+.vercel/
+.netlify/
+coverage/
+.nyc_output/
+
+# ==========================================
+# 6. PYTHON / DJANGO / FLASK / DATA SCIENCE
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ipynb_checkpoints/
+*.egg-info/
+.installed.cfg
+*.egg
+db.sqlite3
+db.sqlite3-journal
+
+# ==========================================
+# 7. PHP / LARAVEL / SYMFONY / COMPOSER
+# ==========================================
+/vendor/
+composer.phar
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+.php-cs-fixer.cache
+public/hot
+public/storage
+storage/*.key
+
+# ==========================================
+# 8. JAVA / SPRING / MAVEN / GRADLE
+# ==========================================
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+target/
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# ==========================================
+# 9. C# / .NET / VISUAL STUDIO
+# ==========================================
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# ==========================================
+# 10. BASES DE DONNEES & DUMPS
+# ==========================================
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+*.mdb
+*.dump
+
+# ==========================================
+# 11. DOCUMENTS, MEMOIRE & LATEX (Word, PDF compilés)
+# ==========================================
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+*.aux
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc
+*.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+*.nav
+*.snm
+*.vrb
+*.bcf
+*.run.xml
+"@ | Out-File -FilePath ".gitignore" -Encoding utf8

@@ -1,0 +1,31 @@
+{% extends "home.html" %}
+{% block title %}Kumbu | cotanct{% endblock  %}
+
+{% block content %}
+ <section id="page-contact" class="page">
+    <div class="page-header">
+      <div class="container">
+        <h1>Contact</h1>
+        <p>Pour toute question professionnelle ou proposition de collaboration.</p>
+      </div>
+    </div>
+    <div class="section">
+      <div class="container two-col">
+        <form class="card">
+          <div class="field"><label for="c-nom">Nom complet</label><input id="c-nom" type="text" placeholder="Votre nom"></div>
+          <div class="field"><label for="c-email">Adresse e-mail</label><input id="c-email" type="email" placeholder="vous@exemple.com"></div>
+          <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" placeholder="Votre message…"></textarea></div>
+          <button type="submit" class="btn btn-primary btn-block">Envoyer le message</button>
+        </form>
+        <div>
+          <h3>Informations</h3>
+          <ul class="info-list">
+            <li><span class="label">E-mail</span> contact@kumbu.app</li>
+            <li><span class="label">Réponse</span> sous 48 heures</li>
+            <li><span class="label">Objet</span> demandes professionnelles uniquement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}  

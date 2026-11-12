@@ -1,0 +1,45 @@
+
+.brand-link {
+    padding: 8px 15px;
+    background-color: #1e3a8a; 
+}
+
+.brand-link .brand-image{
+    width: auto;
+    float: left;
+    margin-right: 10px;
+    border-radius: 8px; 
+}
+
+.brand-link .brand-text {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: white 
+}
+
+/* ===== BARRE DU HAUT ===== */
+.navbar {
+    background-color: #1e3a8a 
+}
+
+.navbar .nav-link {
+    color: white 
+}
+
+/* ===== BOUTONS ===== */
+.btn-primary, .button, input [type=submit] {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+/* ===== MODULES / CARTES ===== */
+.module h2, .module caption {
+    background: #2563eb;
+    color: white;
+    border-radius: 8px 8px 0 0;
+}

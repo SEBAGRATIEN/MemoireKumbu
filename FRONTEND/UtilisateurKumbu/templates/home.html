@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Kumbu — Votre bibliothèque{% endblock  %}</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'img/logo.jpeg' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+{% include "partials/sidebar.html" %}
+{% block content %}{% endblock %}
+
+<!-- ==================== PIED DE PAGE ==================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:10px">Kum<span>bu</span></div>
+        <p style="font-size:13px">Votre bibliothèque, augmentée par l'IA.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="{% url 'base' %}">Accueil</a>
+        <a href="{% url 'propos' %}">À propos</a>
+        <a href="{% url 'contact' %}">Contact</a>
+        <a href="{% url 'recherche' %}">Catégories</a>
+      </div>
+      <div class="footer-col">
+        <h4>Compte</h4>
+        <a href="{% url 'mon_profil' %}">Mon profil</a>
+        <a href="{% url 'deconnexion' %}">Déconnexion</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ressources</h4>
+        <a href="{% url 'centre_aide' %}">Centre d'aide</a>
+        <a href="{% url 'conditions' %}">Conditions d'utilisation</a>
+        <a href="{% url 'politiques' %}">Politique de confidentialité</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Kumbu — Tous droits réservés</span>
+      <span>Ressources · ID étudiant</span>
+    </div>
+  </div>
+</footer>
+
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
