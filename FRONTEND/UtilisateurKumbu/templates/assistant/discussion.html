@@ -1,4 +1,4 @@
-{% extends "home.html" %}  
+{% extends "home.html" %}
 
 {% block title %}Assistant | kumbu{% endblock %}
 
@@ -6,8 +6,13 @@
   <section id="page-ia" class="page">
     <div class="page-header">
       <div class="container">
-        <h1>Assistant IA Kumbu</h1>
-        <p>Posez vos questions sur un livre ou un sujet ; l'assistant vous répond à partir de ce que vous avez lu.</p>
+        <div class="page-header-inner">
+          <span class="page-icon"><i class="bi bi-robot"></i></span>
+          <div>
+            <h1>Assistant IA Kumbu</h1>
+            <p>Posez vos questions sur un livre ou un sujet ; l'assistant vous répond à partir de ce que vous avez lu.</p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="chat-shell">
@@ -18,8 +23,8 @@
       </div>
       <form class="chat-input" id="chatForm">
         <input type="text" placeholder="Écrivez votre question…" autocomplete="off">
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Envoyer</button>
       </form>
     </div>
   </section>
-{% endblock  %}  
+{% endblock  %}

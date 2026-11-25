@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-from pathlib import Path
+from pathlib import Path, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    #'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,9 +119,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'UtilisateurKumbu' / 'static',
 ]
 
 
@@ -130,19 +132,22 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_URL_NAME = "connexion"
+
 JAZZMIN_SETTINGS = {
     "show_ui_builder": True,
     "site_title": "Kumbu Admin",
     "site_header": "Kumbu Admin",
     "site_brand": "Kumbu Administation",
-    "site_logo": "img/logo.jpeg",
+    #"site_logo": "img/logo.jpeg",
     "custom_css": "admin/css/style.css",
     }
 
-#JAZZMIN_UI_TUNES = {
-    #"theme": "flatly", 
-    #"navbar": "navbar-white navbar-light",
-    #"sidebar": "sidebar-light-primary",}
-    #"brand_colour": "navbar-white",
-    #"no_navbar_border": False,
-    #"sidebar_nav_child_indent": True,#
+JAZZMIN_UI_TUNES = {
+    "theme": "flatly", 
+    "navbar": "navbar-white navbar-light",
+    "sidebar": "sidebar-light-primary",
+    "brand_colour": "navbar-white",
+    "no_navbar_border": False,
+    "sidebar_nav_child_indent": True,
+}

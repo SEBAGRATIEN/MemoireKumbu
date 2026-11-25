@@ -14,12 +14,18 @@ document.addEventListener("DOMContentLoaded", function () {
       mainNav.classList.remove("open");
       hamburger.classList.remove("open");
       hamburger.setAttribute("aria-expanded", "false");
+      majIconeMenu(false);
+    }
+    function majIconeMenu(ouvert) {
+      var ic = hamburger.querySelector(".bi");
+      if (ic) { ic.classList.toggle("bi-list", !ouvert); ic.classList.toggle("bi-x-lg", ouvert); }
     }
 
     hamburger.addEventListener("click", function () {
       var isOpen = mainNav.classList.toggle("open");
       hamburger.classList.toggle("open", isOpen);
       hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      majIconeMenu(isOpen);
     });
 
     // Fermer proprement le menu après avoir choisi une page.
@@ -47,8 +53,98 @@ document.addEventListener("DOMContentLoaded", function () {
       var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
       try { localStorage.setItem("kumbu-theme", next); } catch (err) {}
+      if (typeof marquerThemeActif === "function") marquerThemeActif();
     });
   }
+
+  /* ---------- Choix du thème dans les paramètres (clair / sombre / auto) ---------- */
+  var themeButtons = document.querySelectorAll("[data-set-theme]");
+  function marquerThemeActif() {
+    var stocke = null;
+    try { stocke = localStorage.getItem("kumbu-theme"); } catch (err) {}
+    themeButtons.forEach(function (b) {
+      var choix = b.dataset.setTheme;
+      b.classList.toggle("is-active", choix === (stocke || "auto"));
+    });
+  }
+  themeButtons.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var choix = b.dataset.setTheme;
+      if (choix === "auto") {
+        try { localStorage.removeItem("kumbu-theme"); } catch (err) {}
+        root.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      } else {
+        try { localStorage.setItem("kumbu-theme", choix); } catch (err) {}
+        root.setAttribute("data-theme", choix);
+      }
+      marquerThemeActif();
+    });
+  });
+  marquerThemeActif();
+
+  /* ---------- Afficher / masquer le mot de passe (icône œil) ---------- */
+  document.querySelectorAll("[data-toggle-password]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var champ = document.getElementById(btn.dataset.togglePassword);
+      if (!champ) return;
+      var visible = champ.type === "password";
+      champ.type = visible ? "text" : "password";
+      var icone = btn.querySelector(".bi");
+      if (icone) {
+        icone.classList.toggle("bi-eye", !visible);
+        icone.classList.toggle("bi-eye-slash", visible);
+      }
+    });
+  });
+
+  /* ---------- Aperçu immédiat d'une image choisie (photo de profil, publication) ---------- */
+  document.querySelectorAll("input[type=file][data-preview-img]").forEach(function (input) {
+    input.addEventListener("change", function () {
+      var img = document.getElementById(input.dataset.previewImg);
+      var masquer = input.dataset.previewHide && document.getElementById(input.dataset.previewHide);
+      var boite = input.dataset.previewBox && document.getElementById(input.dataset.previewBox);
+      if (!img) return;
+      if (input.files && input.files[0]) {
+        img.src = URL.createObjectURL(input.files[0]);
+        img.hidden = false;
+        if (masquer) masquer.hidden = true;
+        if (boite) boite.classList.add("show");
+      } else {
+        img.removeAttribute("src");
+        if (boite) boite.classList.remove("show");
+      }
+    });
+  });
+
+  /* ---------- Visionneuse : clic sur une photo = image en entier ---------- */
+  function fermerVisionneuse() {
+    var ouverte = document.querySelector(".lightbox");
+    if (ouverte) ouverte.remove();
+  }
+  document.addEventListener("click", function (event) {
+    var cible = event.target.closest("[data-lightbox]");
+    if (!cible) return;
+    event.preventDefault();
+    fermerVisionneuse();
+    var voile = document.createElement("div");
+    voile.className = "lightbox";
+    voile.setAttribute("role", "dialog");
+    voile.setAttribute("aria-label", "Image en entier");
+    var image = document.createElement("img");
+    image.src = cible.dataset.lightbox;
+    image.alt = "";
+    var fermer = document.createElement("button");
+    fermer.type = "button";
+    fermer.setAttribute("aria-label", "Fermer");
+    fermer.innerHTML = '<i class="bi bi-x-lg"></i>';
+    voile.appendChild(image);
+    voile.appendChild(fermer);
+    voile.addEventListener("click", fermerVisionneuse);   /* clic n'importe où = fermer */
+    document.body.appendChild(voile);
+  });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") fermerVisionneuse();
+  });
 
   /* ---------- Onglets connexion / inscription ---------- */
   var authTabs = document.querySelectorAll(".auth-tab");
@@ -61,16 +157,6 @@ document.addEventListener("DOMContentLoaded", function () {
       authForms.forEach(function (form) {
         form.classList.toggle("active", form.id === "form-" + target);
       });
-    });
-  });
-
-  /* ---------- Onglets secondaires (page profil) ---------- */
-  var profileTabs = document.querySelectorAll(".tabs-secondary span");
-  profileTabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      profileTabs.forEach(function (t) { t.classList.remove("active"); });
-      tab.classList.add("active");
-      /* Le contenu réel de chaque onglet sera branché côté Django (vues/contexte) */
     });
   });
 

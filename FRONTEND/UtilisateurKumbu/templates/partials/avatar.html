@@ -1,0 +1,10 @@
+{# Paramètres : profil, taille (sm | md | xl), zoom (True = clic pour voir la photo en entier) #}
+{% if profil.photo %}
+  {% if zoom %}
+  <button type="button" class="avatar avatar-{{ taille }}" data-lightbox="{{ profil.photo.url }}" aria-label="Voir la photo de profil en entier" title="Voir la photo"><img src="{{ profil.photo.url }}" alt="Photo de profil"></button>
+  {% else %}
+  <span class="avatar avatar-{{ taille }}"><img src="{{ profil.photo.url }}" alt=""></span>
+  {% endif %}
+{% else %}
+  <span class="avatar avatar-{{ taille }}" aria-hidden="true"><i class="bi bi-person-fill"></i></span>
+{% endif %}

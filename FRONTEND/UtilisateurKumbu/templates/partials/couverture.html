@@ -1,0 +1,2 @@
+{# Paramètre : livre #}
+{% if livre.couverture %}<img class="cover" src="{{ livre.couverture.url }}" alt="Couverture : {{ livre.titre }}">{% else %}<div class="cover cover-vide cv-{{ livre.variante_couverture }}" aria-hidden="true"><i class="bi bi-book"></i></div>{% endif %}

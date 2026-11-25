@@ -1,0 +1,28 @@
+{% extends "home.html" %}
+{% block title %}Mes livres publiés | kumbu{% endblock %}
+{% block content %}
+  <section class="page">
+    {% include "mon_profil/_entete.html" %}
+    <div class="container" style="padding-bottom:24px">
+      <div class="page-actions">
+        <p>Touchez une couverture pour ouvrir le livre.</p>
+        <a href="{% url 'publiLivre' %}" class="btn btn-primary"><i class="bi bi-journal-plus"></i> Publier un livre</a>
+      </div>
+
+      {% if livres %}
+      <div class="book-grid">
+        {% for l in livres %}
+          {% include "partials/livre_carte.html" with livre=l statut=1 action_lu=1 %}
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="card empty-state">
+        <span class="empty-icon"><i class="bi bi-journal-plus"></i></span>
+        <h3>Aucun livre publié</h3>
+        <p>Les livres que vous publiez apparaissent ici, avec leur statut d'approbation.</p>
+        <a href="{% url 'publiLivre' %}" class="btn btn-primary" style="margin-top:12px"><i class="bi bi-journal-plus"></i> Publier mon premier livre</a>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,17 @@
+<div class="card">
+  <h3 class="card-title"><i class="bi bi-person-badge"></i> Présentation</h3>
+  {% if profil.biographie %}<p class="profile-bio">{{ profil.biographie }}</p>{% else %}<p class="profile-bio" style="color:var(--text-muted)">Aucune biographie pour le moment. <a href="{% url 'modifier_profil' %}" style="color:var(--gold-dark);font-weight:600">Ajouter une biographie</a></p>{% endif %}
+  <ul class="side-list">
+    {% if profil.etablissement %}<li><i class="bi bi-mortarboard"></i><span>Étudie à <strong>{{ profil.etablissement }}</strong></span></li>{% endif %}
+    {% if profil.filiere %}<li><i class="bi bi-journal-bookmark"></i><span>Filière : <strong>{{ profil.filiere }}</strong>{% if profil.niveau %} ({{ profil.niveau }}){% endif %}</span></li>{% endif %}
+    {% if profil.annee_academique %}<li><i class="bi bi-calendar3"></i><span>Année académique : <strong>{{ profil.annee_academique }}</strong></span></li>{% endif %}
+    <li><i class="bi bi-clock-history"></i><span>Membre depuis <strong>{{ profil.date_creation|date:"F Y" }}</strong></span></li>
+  </ul>
+</div>
+<div class="card">
+  <div class="stat-row">
+    <div><b>{{ nb_publications }}</b><span>Actualités</span></div>
+    <div><b>{{ nb_livres_publies }}</b><span>Publiés</span></div>
+    <div><b>{{ nb_livres_lus }}</b><span>Lus</span></div>
+  </div>
+</div>

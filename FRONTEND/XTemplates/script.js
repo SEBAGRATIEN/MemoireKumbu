@@ -122,3 +122,29 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 });
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+  import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup
+  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA14B1oKjqJHyBmaR8PP5LgHy6mWJyIgtQ",
+  authDomain: "kumbu-67e5a.firebaseapp.com",
+  projectId: "kumbu-67e5a",
+  storageBucket: "kumbu-67e5a.firebasestorage.app",
+  messagingSenderId: "424041539643",
+  appId: "1:424041539643:web:8e3ae3fd06551d8e28d41e"
+};
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  window.kumbuFirebase = {
+    auth,
+    provider,
+    signInWithPopup
+  };

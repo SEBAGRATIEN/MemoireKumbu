@@ -1,0 +1,52 @@
+{% extends "home.html" %}
+{% block title %}Publier un livre | kumbu{% endblock %}
+{% block content %}
+  <section class="page">
+    {% include "mon_profil/_entete.html" %}
+    <div class="container">
+
+      {% if form.errors %}
+        <div class="alert alert-error"><i class="bi bi-exclamation-circle"></i><ul>{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}{% for f in form %}{% for e in f.errors %}<li>{{ f.label }} : {{ e }}</li>{% endfor %}{% endfor %}</ul></div>
+      {% endif %}
+
+      <form method="post" enctype="multipart/form-data" class="edit-layout" action="{% url 'publiLivre' %}">
+        {% csrf_token %}
+
+        <div class="card photo-edit">
+          <h3 class="card-title" style="justify-content:center"><i class="bi bi-image"></i> Couverture</h3>
+          <div class="cover-preview">
+            <img id="couvPreview" alt="Aperçu de la couverture" hidden>
+            <i class="bi bi-book" id="couvVide"></i>
+          </div>
+          <label class="btn btn-outline btn-block" for="id_couverture" style="cursor:pointer"><i class="bi bi-upload"></i> Choisir une couverture</label>
+          {{ form.couverture }}
+          <p class="note">Facultatif. JPG, PNG ou WebP — 5 Mo maximum. Sans couverture, une icône est affichée.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title"><i class="bi bi-journal-plus"></i> Publier un livre</h3>
+          {% include "mon_profil/_champ.html" with champ=form.titre %}
+          {% include "mon_profil/_champ.html" with champ=form.auteur %}
+          {% include "mon_profil/_champ.html" with champ=form.description %}
+          <div class="two-fields">
+            {% include "mon_profil/_champ.html" with champ=form.categorie %}
+            {% include "mon_profil/_champ.html" with champ=form.langue %}
+          </div>
+          {% include "mon_profil/_champ.html" with champ=form.fichier %}
+          <div class="two-fields">
+            {% include "mon_profil/_champ.html" with champ=form.nombre_pages %}
+            {% include "mon_profil/_champ.html" with champ=form.date_publication %}
+          </div>
+          {% include "mon_profil/_champ.html" with champ=form.isbn %}
+
+          <p class="note-approval"><i class="bi bi-info-circle"></i> Après l'envoi, votre livre est examiné avant d'être visible de tous. Vous le retrouvez dans « Mes livres publiés ».</p>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Publier le livre</button>
+            <a href="{% url 'livres_publies' %}" class="btn btn-outline">Annuler</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}

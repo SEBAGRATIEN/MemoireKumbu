@@ -1,0 +1,44 @@
+{% extends "home.html" %}
+{% block title %}Livres lus | kumbu{% endblock %}
+{% block content %}
+  <section class="page">
+    {% include "mon_profil/_entete.html" %}
+    <div class="container" style="padding-bottom:24px">
+      {% if lectures %}
+      <div class="livre-list">
+        {% for lecture in lectures %}
+        <div class="card livre-row">
+          <a href="{% url 'livre_detail' lecture.livre.pk %}" aria-label="Ouvrir : {{ lecture.livre.titre }}">
+            {% if lecture.livre.couverture %}<img class="mini-cover" src="{{ lecture.livre.couverture.url }}" alt="">{% else %}<span class="mini-cover cover-vide cv-{{ lecture.livre.variante_couverture }}" aria-hidden="true"><i class="bi bi-book"></i></span>{% endif %}
+          </a>
+          <div style="flex:1;min-width:0">
+            <h3><a href="{% url 'livre_detail' lecture.livre.pk %}">{{ lecture.livre.titre }}</a></h3>
+            <p>{{ lecture.livre.auteur }} · dernière lecture le {{ lecture.derniere_lecture|date:"d F Y" }}</p>
+            {% if lecture.termine %}
+              <span class="badge badge-ok"><i class="bi bi-check-circle"></i> Terminé</span>
+            {% else %}
+              <div class="progress" aria-label="Progression"><i style="width: {{ lecture.progression }}%"></i></div>
+              <p style="font-size:12px;margin-top:4px">{{ lecture.progression }} % lu</p>
+            {% endif %}
+          </div>
+          <div class="livre-actions">
+            {% if lecture.livre.fichier %}<a href="{% url 'livre_lire' lecture.livre.pk %}" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="bi bi-book"></i> Lire</a>{% endif %}
+            <form method="post" action="{% url 'livre_lu' lecture.livre.pk %}" onsubmit="return confirm('Retirer ce livre de vos livres lus ?');">
+              {% csrf_token %}<input type="hidden" name="action" value="retirer"><input type="hidden" name="next" value="{{ request.get_full_path }}">
+              <button type="submit" class="btn btn-ghost btn-sm" aria-label="Retirer de mes livres lus" title="Retirer"><i class="bi bi-bookmark-x"></i></button>
+            </form>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="card empty-state">
+        <span class="empty-icon"><i class="bi bi-book"></i></span>
+        <h3>Aucun livre lu</h3>
+        <p>Ouvrez un livre puis choisissez « Enregistrer dans mes livres lus » : il apparaîtra ici.</p>
+        <a href="{% url 'recherche' %}" class="btn btn-primary" style="margin-top:12px"><i class="bi bi-search"></i> Parcourir les livres</a>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

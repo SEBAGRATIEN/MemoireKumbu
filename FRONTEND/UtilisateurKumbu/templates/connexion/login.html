@@ -2,83 +2,112 @@
 {% block title %}Connexion | kumbu{% endblock %}
 
 {% block content %}
- <section id="page-connexion" class="page">
-    <div class="auth-wrap">
-      <div class="auth-card">
-        <div style="text-align:center; margin-bottom:22px;">
-          <div class="logo" style="justify-content:center">Kum<span>bu</span></div>
-        </div>
+<section id="page-connexion" class="auth-layout">
 
-        <div class="auth-tabs">
-          <div class="auth-tab active" data-form="connexion">Se connecter</div>
-          <div class="auth-tab" data-form="inscription">Créer un compte</div>
-        </div>
-
-        <!-- Formulaire : Se connecter -->
-        <form class="auth-form active" id="form-connexion">
-          <div class="field"><label for="lc-nom">Nom</label><input id="lc-nom" type="text" placeholder="Votre nom"></div>
-          <div class="field"><label for="lc-mdp">Mot de passe</label><input id="lc-mdp" type="password" placeholder="••••••••"></div>
-          <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
-        </form>
-
-        <!-- Formulaire : Créer un compte -->
-        <form class="auth-form" id="form-inscription">
-          <div class="two-fields">
-            <div class="field"><label for="li-nom">Nom</label><input id="li-nom" type="text" placeholder="Nom"></div>
-            <div class="field"><label for="li-postnom">Post-nom</label><input id="li-postnom" type="text" placeholder="Post-nom"></div>
-          </div>
-          <div class="field"><label for="li-prenom">Prénom</label><input id="li-prenom" type="text" placeholder="Prénom"></div>
-          <div class="field"><label for="li-mdp1">Mot de passe</label><input id="li-mdp1" type="password" placeholder="••••••••"></div>
-          <div class="field"><label for="li-mdp2">Confirmer le mot de passe</label><input id="li-mdp2" type="password" placeholder="••••••••"></div>
-          <button type="submit" class="btn btn-primary btn-block">Créer mon compte</button>
-        </form>
-
-        <div class="auth-divider">ou</div>
-
-        <button type="button" id="google-login" class="student-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#4285F4" d="M21.35 12.27c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42Z"/>
-            <path fill="#34A853" d="M12 21.5c2.63 0 4.84-.87 6.46-2.35l-3.14-2.45c-.87.58-1.98.92-3.32.92-2.55 0-4.71-1.72-5.49-4.04H3.27v2.53A9.75 9.75 0 0 0 12 21.5Z"/>
-            <path fill="#FBBC05" d="M6.51 13.58A5.86 5.86 0 0 1 6.2 12c0-.55.1-1.09.31-1.58V7.89H3.27A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.06 1.02 4.11l3.24-2.53Z"/>
-            <path fill="#EA4335" d="M12 6.38c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.83 3.39 14.63 2.5 12 2.5a9.75 9.75 0 0 0-8.73 5.39l3.24 2.53C7.29 8.1 9.45 6.38 12 6.38Z"/>
-          </svg>
-          Continuer avec Google
-        </button>
-
-        <p id="google-error" style="display:none; margin-top:12px; text-align:center; color:#c0392b; font-size:13px;"></p>
-      </div>
+  <!-- Volet gauche : message + icônes (aucune image) -->
+  <aside class="auth-aside">
+    {% include "partials/logo.html" %}
+    <div>
+      <h2>La connaissance à la portée de tous</h2>
+      <p>Recherchez, sauvegardez et partagez des livres, puis approfondissez chaque lecture avec l'assistant IA.</p>
+      <ul class="auth-points">
+        <li><i class="bi bi-journal-bookmark"></i><span>Des milliers de livres et de ressources</span></li>
+        <li><i class="bi bi-robot"></i><span>Un assistant IA pour répondre à vos questions</span></li>
+        <li><i class="bi bi-people"></i><span>Un espace réservé à votre promotion</span></li>
+      </ul>
     </div>
-  </section>
-{% endblock %}
+    <span></span>
+  </aside>
 
-{% block extra_js %}
+  <!-- Volet droit : formulaires -->
+  <main class="auth-wrap">
+    <div class="auth-top-actions">{% include "partials/theme_swicth.html" %}</div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-  import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup
-  } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+    <div class="auth-card">
+      <div class="auth-title">
+        <h1>Bienvenue sur Kumbu</h1>
+        <p>Connectez-vous ou créez un compte pour continuer.</p>
+      </div>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA14B1oKjqJHyBmaR8PP5LgHy6mWJyIgtQ",
-  authDomain: "kumbu-67e5a.firebaseapp.com",
-  projectId: "kumbu-67e5a",
-  storageBucket: "kumbu-67e5a.firebasestorage.app",
-  messagingSenderId: "424041539643",
-  appId: "1:424041539643:web:8e3ae3fd06551d8e28d41e"
-};
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab {% if onglet == 'connexion' %}active{% endif %}" data-form="connexion" role="tab">Se connecter</button>
+        <button type="button" class="auth-tab {% if onglet == 'inscription' %}active{% endif %}" data-form="inscription" role="tab">Créer un compte</button>
+      </div>
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
+      <!-- Se connecter -->
+      <form class="auth-form {% if onglet == 'connexion' %}active{% endif %}" id="form-connexion" method="post" action="{% url 'connexion' %}" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="action" value="connexion">
+        <input type="hidden" name="next" value="{{ next }}">
+        {% if form_connexion.errors %}
+          <div class="alert alert-error" role="alert"><i class="bi bi-exclamation-circle"></i><ul>{% for e in form_connexion.non_field_errors %}<li>{{ e }}</li>{% endfor %}{% for f in form_connexion %}{% for e in f.errors %}<li>{{ e }}</li>{% endfor %}{% endfor %}</ul></div>
+        {% endif %}
+        <div class="field">
+          <label for="lc-nom">Nom d'utilisateur ou e-mail</label>
+          <div class="input-icon"><i class="bi bi-person"></i>
+            <input id="lc-nom" name="identifiant" type="text" placeholder="Votre identifiant ou e-mail" value="{{ form_connexion.identifiant.value|default:'' }}" autocomplete="username" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="lc-mdp">Mot de passe</label>
+          <div class="input-icon has-toggle"><i class="bi bi-lock"></i>
+            <input id="lc-mdp" name="mot_de_passe" type="password" placeholder="••••••••" autocomplete="current-password" required>
+            <button type="button" class="toggle-pass" data-toggle-password="lc-mdp" aria-label="Afficher ou masquer le mot de passe"><i class="bi bi-eye"></i></button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+      </form>
 
-  window.kumbuFirebase = {
-    auth,
-    provider,
-    signInWithPopup
-  };
-</script>
+      <!-- Créer un compte -->
+      <form class="auth-form {% if onglet == 'inscription' %}active{% endif %}" id="form-inscription" method="post" action="{% url 'connexion' %}" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="action" value="inscription">
+        {% if form_inscription.errors %}
+          <div class="alert alert-error" role="alert"><i class="bi bi-exclamation-circle"></i><ul>{% for e in form_inscription.non_field_errors %}<li>{{ e }}</li>{% endfor %}{% for f in form_inscription %}{% for e in f.errors %}<li>{{ e }}</li>{% endfor %}{% endfor %}</ul></div>
+        {% endif %}
+        <div class="two-fields">
+          <div class="field"><label for="li-nom">Nom</label><input id="li-nom" name="nom" type="text" placeholder="Nom" value="{{ form_inscription.nom.value|default:'' }}" required></div>
+          <div class="field"><label for="li-postnom">Post-nom</label><input id="li-postnom" name="post_nom" type="text" placeholder="Post-nom" value="{{ form_inscription.post_nom.value|default:'' }}"></div>
+        </div>
+        <div class="field"><label for="li-prenom">Prénom</label><input id="li-prenom" name="prenom" type="text" placeholder="Prénom" value="{{ form_inscription.prenom.value|default:'' }}" required></div>
+        <div class="field">
+          <label for="li-email">Adresse e-mail</label>
+          <div class="input-icon"><i class="bi bi-envelope"></i>
+            <input id="li-email" name="email" type="email" placeholder="vous@exemple.com" value="{{ form_inscription.email.value|default:'' }}" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="li-mdp1">Mot de passe</label>
+          <div class="input-icon has-toggle"><i class="bi bi-lock"></i>
+            <input id="li-mdp1" name="mot_de_passe" type="password" placeholder="••••••••" autocomplete="new-password" required>
+            <button type="button" class="toggle-pass" data-toggle-password="li-mdp1" aria-label="Afficher ou masquer le mot de passe"><i class="bi bi-eye"></i></button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="li-mdp2">Confirmer le mot de passe</label>
+          <div class="input-icon"><i class="bi bi-lock-fill"></i>
+            <input id="li-mdp2" name="mot_de_passe2" type="password" placeholder="••••••••" autocomplete="new-password" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Créer mon compte</button>
+      </form>
 
+      <div class="auth-divider">ou</div>
+
+      <!-- Bouton Google -->
+      <button type="button" id="google-login" class="btn-google">
+        <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+        </svg>
+        <span>Continuer avec Google</span>
+      </button>
+      <p id="google-error" class="auth-error"></p>
+    </div>
+
+    <p class="auth-back"><a href="{% url 'base' %}"><i class="bi bi-arrow-left"></i> Retour à l'accueil</a></p>
+  </main>
+</section>
 {% endblock %}

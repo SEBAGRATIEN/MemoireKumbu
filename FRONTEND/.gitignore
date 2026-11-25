@@ -107,6 +107,8 @@ __pycache__/
 *$py.class
 *.so
 .Python
+staticfiles/
+/staticfiles/
 env/
 venv/
 ENV/
@@ -209,3 +211,5 @@ x86/
 *.bcf
 *.run.xml
 "@ | Out-File -FilePath ".gitignore" -Encoding utf8
+
+.staticfiles/

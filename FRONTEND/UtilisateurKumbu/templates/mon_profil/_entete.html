@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="profile-banner" aria-hidden="true"></div>
+
+  <div class="profile-head">
+    {% include "partials/avatar.html" with profil=profil taille="xl" zoom=True %}
+    <div class="profile-id">
+      <h1>{{ profil.nom_complet }}</h1>
+      <p class="subtitle">
+        {% if profil.niveau or profil.filiere %}Étudiant — {{ profil.niveau }} {{ profil.filiere }}{% else %}Membre de Kumbu{% endif %}
+        {% if profil.etablissement %} · {{ profil.etablissement }}{% endif %}
+      </p>
+    </div>
+    <div class="profile-actions">
+      <a href="{% url 'modifier_profil' %}" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Modifier le profil</a>
+      <a href="{% url 'parametres' %}" class="btn btn-outline"><i class="bi bi-gear"></i> Paramètres</a>
+    </div>
+  </div>
+
+  <nav class="tabs-secondary" aria-label="Sections du profil">
+    <a href="{% url 'mon_profil' %}" class="{% if onglet == 'actus' %}active{% endif %}"><i class="bi bi-newspaper"></i> Actualités <span class="count">{{ nb_publications }}</span></a>
+    <a href="{% url 'profil_informations' %}" class="{% if onglet == 'infos' %}active{% endif %}"><i class="bi bi-person-lines-fill"></i> Informations</a>
+    <a href="{% url 'livres_publies' %}" class="{% if onglet == 'publies' %}active{% endif %}"><i class="bi bi-journal-plus"></i> Mes livres publiés <span class="count">{{ nb_livres_publies }}</span></a>
+    <a href="{% url 'publiLivre' %}" class="{% if onglet == 'publier' %}active{% endif %}"><i class="bi bi-journal-plus"></i> Publier un livre</a>
+    <a href="{% url 'livres_lus' %}" class="{% if onglet == 'lus' %}active{% endif %}"><i class="bi bi-book"></i> Livres lus <span class="count">{{ nb_livres_lus }}</span></a>
+    <a href="{% url 'parametres' %}" class="{% if onglet == 'parametres' %}active{% endif %}"><i class="bi bi-gear"></i> Paramètres</a>
+  </nav> 
+</div>

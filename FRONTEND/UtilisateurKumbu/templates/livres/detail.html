@@ -1,0 +1,75 @@
+{% extends "home.html" %}
+{% block title %}{{ livre.titre }} | kumbu{% endblock %}
+{% block content %}
+  <section class="page">
+    <div class="container">
+      <a class="back-link" href="{% url 'recherche' %}"><i class="bi bi-arrow-left"></i> Retour aux livres</a>
+
+      <div class="detail-grid">
+        <div class="detail-cover">{% include "partials/couverture.html" with livre=livre %}</div>
+
+        <div class="card detail-info">
+          <h1>{{ livre.titre }}</h1>
+          <p class="detail-author"><i class="bi bi-person"></i> {{ livre.auteur }}</p>
+
+          <div class="meta-chips">
+            {% if livre.categorie %}<span class="chip"><i class="bi bi-tag"></i> {{ livre.categorie.nom }}</span>{% endif %}
+            <span class="chip"><i class="bi bi-translate"></i> {{ livre.langue }}</span>
+            {% if livre.nombre_pages %}<span class="chip"><i class="bi bi-file-earmark-text"></i> {{ livre.nombre_pages }} pages</span>{% endif %}
+            {% if livre.date_publication %}<span class="chip"><i class="bi bi-calendar3"></i> {{ livre.date_publication|date:"d F Y" }}</span>{% endif %}
+            {% if livre.isbn %}<span class="chip"><i class="bi bi-upc"></i> {{ livre.isbn }}</span>{% endif %}
+            {% if not livre.publie %}<span class="badge badge-wait"><i class="bi bi-hourglass-split"></i> En attente d'approbation</span>{% endif %}
+          </div>
+
+          {% if livre.description %}<p class="detail-desc">{{ livre.description }}</p>{% endif %}
+
+          <div class="detail-actions">
+            {% if livre.fichier %}
+              <a href="{% url 'livre_lire' livre.pk %}" target="_blank" rel="noopener" class="btn btn-primary"><i class="bi bi-book"></i> Lire le livre</a>
+            {% else %}
+              <span class="chip"><i class="bi bi-exclamation-circle"></i> Aucun fichier disponible</span>
+            {% endif %}
+
+            {% if not lecture %}
+              <form method="post" action="{% url 'livre_lu' livre.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="ajouter">
+                <button type="submit" class="btn btn-outline"><i class="bi bi-bookmark-plus"></i> Enregistrer dans mes livres lus</button>
+              </form>
+            {% endif %}
+          </div>
+
+          {% if lecture %}
+          <div class="lecture-box">
+            <div class="lecture-head">
+              <span class="badge badge-ok"><i class="bi bi-bookmark-check"></i> Dans vos livres lus</span>
+              {% if lecture.termine %}<span class="badge badge-ok"><i class="bi bi-check-circle"></i> Terminé</span>{% endif %}
+            </div>
+
+            <form method="post" action="{% url 'livre_lu' livre.pk %}" class="progress-form">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="progression">
+              <label for="prog">Ma progression : <b id="progVal">{{ lecture.progression }}</b> %</label>
+              <input id="prog" type="range" name="progression" min="0" max="100" step="5" value="{{ lecture.progression }}" oninput="document.getElementById('progVal').textContent=this.value">
+              <button type="submit" class="btn btn-outline btn-sm"><i class="bi bi-check-lg"></i> Enregistrer</button>
+            </form>
+
+            <div class="lecture-actions">
+              {% if not lecture.termine %}
+              <form method="post" action="{% url 'livre_lu' livre.pk %}">
+                {% csrf_token %}<input type="hidden" name="action" value="terminer">
+                <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check-circle"></i> Marquer comme terminé</button>
+              </form>
+              {% endif %}
+              <form method="post" action="{% url 'livre_lu' livre.pk %}" onsubmit="return confirm('Retirer ce livre de vos livres lus ?');">
+                {% csrf_token %}<input type="hidden" name="action" value="retirer">
+                <button type="submit" class="btn btn-ghost btn-sm"><i class="bi bi-bookmark-x"></i> Retirer de mes livres lus</button>
+              </form>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -8,13 +8,33 @@
   <link rel="icon" type="image/x-icon" href="{% static 'img/logo.jpeg' %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?v=6">
   {% block extra_css %}{% endblock %}
+  <script>
+    /* Applique le thème avant l'affichage pour éviter le clignotement */
+    (function () {
+      try {
+        var t = localStorage.getItem("kumbu-theme");
+        if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
 
 {% include "partials/sidebar.html" %}
+
+{% if messages %}
+<div class="container flash-zone">
+  {% for message in messages %}
+    <div class="alert {% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}" role="status"><i class="bi {% if message.tags == 'error' %}bi-exclamation-circle{% else %}bi-check-circle{% endif %}"></i><span>{{ message }}</span></div>
+  {% endfor %}
+</div>
+{% endif %}
+
 {% block content %}{% endblock %}
 
 <!-- ==================== PIED DE PAGE ==================== -->
@@ -22,26 +42,26 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col">
-        <div class="logo" style="margin-bottom:10px">Kum<span>bu</span></div>
-        <p style="font-size:13px">Votre bibliothèque, augmentée par l'IA.</p>
+        <div style="margin-bottom:10px">{% include "partials/logo.html" %}</div>
+        <p style="font-size:14px">Votre bibliothèque, augmentée par l'IA.</p>
       </div>
       <div class="footer-col">
         <h4>Navigation</h4>
-        <a href="{% url 'base' %}">Accueil</a>
-        <a href="{% url 'propos' %}">À propos</a>
-        <a href="{% url 'contact' %}">Contact</a>
-        <a href="{% url 'recherche' %}">Catégories</a>
+        <a href="{% url 'base' %}"><i class="bi bi-house"></i> Accueil</a>
+        <a href="{% url 'propos' %}"><i class="bi bi-info-circle"></i> À propos</a>
+        <a href="{% url 'contact' %}"><i class="bi bi-envelope"></i> Contact</a>
+        <a href="{% url 'recherche' %}"><i class="bi bi-search"></i> Recherche</a>
       </div>
       <div class="footer-col">
         <h4>Compte</h4>
-        <a href="{% url 'mon_profil' %}">Mon profil</a>
-        <a href="{% url 'deconnexion' %}">Déconnexion</a>
+        <a href="{% url 'mon_profil' %}"><i class="bi bi-person"></i> Mon profil</a>
+        {% if user.is_authenticated %}<a href="{% url 'deconnexion' %}"><i class="bi bi-box-arrow-right"></i> Déconnexion</a>{% else %}<a href="{% url 'connexion' %}"><i class="bi bi-box-arrow-in-right"></i> Connexion</a>{% endif %}
       </div>
       <div class="footer-col">
         <h4>Ressources</h4>
-        <a href="{% url 'centre_aide' %}">Centre d'aide</a>
-        <a href="{% url 'conditions' %}">Conditions d'utilisation</a>
-        <a href="{% url 'politiques' %}">Politique de confidentialité</a>
+        <a href="{% url 'centre_aide' %}"><i class="bi bi-question-circle"></i> Centre d'aide</a>
+        <a href="{% url 'conditions' %}"><i class="bi bi-file-earmark-text"></i> Conditions d'utilisation</a>
+        <a href="{% url 'politiques' %}"><i class="bi bi-shield-lock"></i> Politique de confidentialité</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -51,7 +71,7 @@
   </div>
 </footer>
 
-  <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/script.js' %}?v=6"></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

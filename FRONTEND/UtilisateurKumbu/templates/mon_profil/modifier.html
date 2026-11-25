@@ -1,0 +1,59 @@
+{% extends "home.html" %}
+{% block title %}Modifier le profil | kumbu{% endblock %}
+{% block content %}
+  <section class="page">
+    {% include "mon_profil/_entete.html" %}
+    <div class="container">
+
+      {% if form.errors %}
+        <div class="alert alert-error"><i class="bi bi-exclamation-circle"></i><ul>{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}{% for f in form %}{% for e in f.errors %}<li>{{ f.label }} : {{ e }}</li>{% endfor %}{% endfor %}</ul></div>
+      {% endif %}
+
+      <form method="post" enctype="multipart/form-data" class="edit-layout" id="form-profil" action="{% url 'modifier_profil' %}">
+        {% csrf_token %}
+
+        <div class="card photo-edit">
+          <h3 class="card-title" style="justify-content:center"><i class="bi bi-camera"></i> Photo de profil</h3>
+          <span class="avatar avatar-xl">
+            <img id="photoPreview" src="{% if profil.photo %}{{ profil.photo.url }}{% endif %}" alt="Photo de profil" {% if not profil.photo %}hidden{% endif %}>
+            <i class="bi bi-person-fill" id="photoVide" {% if profil.photo %}hidden{% endif %}></i>
+          </span>
+          <label class="btn btn-primary btn-block" for="id_photo" style="cursor:pointer"><i class="bi bi-upload"></i> Choisir une photo</label>
+          {{ form.photo }}
+          {% if profil.photo %}
+            <button type="submit" form="form-supprimer-photo" class="btn btn-outline btn-block" onclick="return confirm('Supprimer votre photo de profil ?');"><i class="bi bi-trash"></i> Supprimer la photo</button>
+          {% endif %}
+          <p class="note">JPG, PNG ou WebP — 5 Mo maximum. Votre nouvelle photo apparaîtra aussi dans vos actualités.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title"><i class="bi bi-person-vcard"></i> Identité</h3>
+          <div class="two-fields">
+            {% include "mon_profil/_champ.html" with champ=form.nom %}
+            {% include "mon_profil/_champ.html" with champ=form.post_nom %}
+          </div>
+          <div class="two-fields">
+            {% include "mon_profil/_champ.html" with champ=form.prenom %}
+            {% include "mon_profil/_champ.html" with champ=form.email %}
+          </div>
+          {% include "mon_profil/_champ.html" with champ=form.biographie %}
+
+          <h3 class="card-title" style="margin-top:18px"><i class="bi bi-mortarboard"></i> Parcours académique</h3>
+          {% include "mon_profil/_champ.html" with champ=form.etablissement %}
+          <div class="two-fields">
+            {% include "mon_profil/_champ.html" with champ=form.filiere %}
+            {% include "mon_profil/_champ.html" with champ=form.niveau %}
+          </div>
+          {% include "mon_profil/_champ.html" with champ=form.annee_academique %}
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> Enregistrer</button>
+            <a href="{% url 'mon_profil' %}" class="btn btn-outline">Annuler</a>
+          </div>
+        </div>
+      </form>
+
+      <form id="form-supprimer-photo" method="post" action="{% url 'supprimer_photo' %}">{% csrf_token %}</form>
+    </div>
+  </section>
+{% endblock %}

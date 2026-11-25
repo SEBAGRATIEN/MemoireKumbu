@@ -3,22 +3,30 @@
 
 {% block content %}
     <main>
-
-    <!-- ==================== PAGE ACCUEIL ==================== -->
     <section id="page-accueil" class="page active">
 
         <div class="hero">
-        <div class="container">
+          <div class="container">
+            <span class="eyebrow"><i class="bi bi-stars"></i> La connaissance à la portée de tous</span>
             <h1>Votre bibliothèque,<br>augmentée par l'IA</h1>
             <p class="lead">Recherchez un livre, sauvegardez-le, et posez toutes vos questions à l'assistant Kumbu pour approfondir votre lecture.</p>
-            <div class="search-bar">
-            <input type="text" placeholder="Rechercher un livre, un auteur, un sujet…">
-            <a href="{% url 'recherche' %}" class="btn btn-primary">Rechercher</a>
-            </div>
-            <p class="stat-line">Rejoint par plus de <strong>12 400</strong> apprenants</p>
-        </div>
-        </div>
+            <form class="search-bar" action="{% url 'recherche' %}" method="get">
+              <div class="input-icon">
+                <i class="bi bi-search"></i>
+                <input type="text" name="q" placeholder="Rechercher un livre, un auteur, un sujet…" aria-label="Rechercher">
+              </div>
+              <button type="submit" class="btn btn-primary">Rechercher</button>
+            </form>
+            <p class="stat-line">Rejoint par plus de <strong>{{total_users}}</strong> apprenants</p>
 
+            <div class="features">
+              <div class="feature"><span class="icon-badge"><i class="bi bi-search"></i></span><div><h3>Rechercher</h3><p>Trouvez un livre par titre, auteur ou sujet.</p></div></div>
+              <div class="feature"><span class="icon-badge"><i class="bi bi-bookmark-heart"></i></span><div><h3>Sauvegarder</h3><p>Gardez vos livres et suivez vos lectures.</p></div></div>
+              <div class="feature"><span class="icon-badge"><i class="bi bi-robot"></i></span><div><h3>Questionner l'IA</h3><p>Approfondissez chaque lecture avec l'assistant.</p></div></div>
+            </div>
+          </div>
+        </div>
+        {% if user.is_authenticated %}
         <div class="section">
         <div class="container">
             <div class="section-head">
@@ -26,18 +34,17 @@
             <p><a href="{% url 'recherche' %}">Voir la communauté</a></p>
             </div>
             <div class="grid grid-3">
+            {% for p in profils_recents %}
             <div class="card profile-card">
-                <div class="avatar">EM</div>
-                <div><div class="name">Esther Mbuyi</div><div class="role">Étudiante — L2 Informatique</div></div>
+                {% include "partials/avatar.html" with profil=p taille="md" %}
+                <div><div class="name">{{ p.nom_complet }}</div><div class="role">{% if p.niveau or p.filiere %}Étudiant — {{ p.niveau }} {{ p.filiere }}{% else %}Membre de Kumbu{% endif %}</div></div>
             </div>
+            {% empty %}
             <div class="card profile-card">
-                <div class="avatar">JK</div>
-                <div><div class="name">Joël Kabeya</div><div class="role">Chercheur indépendant</div></div>
+                {% include "partials/avatar.html" with profil=p taille="md" %}
+                <div><div class="name">Aucun utilisateur pour le moment</div><div class="role"></div></div>
             </div>
-            <div class="card profile-card">
-                <div class="avatar">NH</div>
-                <div><div class="name">Nzayituriki H.</div><div class="role">Étudiant — L1 Réseaux et télécoms</div></div>
-            </div>
+            {% endfor %}
             </div>
         </div>
         </div>
@@ -48,31 +55,30 @@
             <h2>Actualités</h2>
             <p><a href="{% url 'recherche' %}">Tous les livres</a></p>
             </div>
-            <div class="grid grid-4">
-            <div class="book-card">
-                <div class="cover"></div>
-                <h3>Réseaux et télécommunications</h3>
-                <p class="author">A. Mwamba</p>
+            <div class="book-grid">
+            {% for l in livres_recents %}
+            {% include "partials/livre_carte.html" with livre=l %}
+            {% empty %}
+            <div class="card empty-state">
+                <span class="empty-icon"><i class="bi bi-journal-plus"></i></span>
+                <h3>Aucun livre n'a encore été publié</h3>
+                <p>Les livres publié apparaitrons ici</p>
             </div>
-            <div class="book-card">
-                <div class="cover"></div>
-                <h3>Introduction à l'algèbre</h3>
-                <p class="author">D. Tshibangu</p>
-            </div>
-            <div class="book-card">
-                <div class="cover"></div>
-                <h3>Systèmes d'exploitation</h3>
-                <p class="author">R. Kanyinda</p>
-            </div>
-            <div class="book-card">
-                <div class="cover"></div>
-                <h3>Bases de données relationnelles</h3>
-                <p class="author">P. Ilunga</p>
-            </div>
+            {% endfor %}
             </div>
         </div>
         </div>
-
+        {% else %}
+        <div class="feature" style="text-align: center; max-width: 700px; margin: 0 auto; padding: 30px; width: 100%; margin-top: 30px; text-align: center; padding: 30px; box-sizing: border-box; display: block;">
+            <span class="icon-badge"><i class="bi bi-lock"></i></span>
+            <h3>Contenu réservé aux membres</h3>
+            <p>Vous devez d'abord vous connecter ou créer un compte pour voir les profils et les livres publiés.</p>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
+                <a href="{% url 'connexion' %}" class="btn btn-primary">Se connecter</a>
+                <a href="{% url 'connexion' %}" class="btn btn-primary" style="background: white; color: #1a1a1a; border: 1px solid #ddd;">Créer un compte</a>
+            </div>
+        </div>
+        {% endif %}
     </section>
     </main>
 {% endblock  %}

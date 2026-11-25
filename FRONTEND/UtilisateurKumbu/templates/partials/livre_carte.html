@@ -1,0 +1,17 @@
+{# Paramètres : livre, statut (affiche l'état de publication), action_lu (bouton « enregistrer comme lu ») #}
+<div class="book-card">
+  <a class="cover-link" href="{% url 'livre_detail' livre.pk %}" aria-label="Ouvrir le livre : {{ livre.titre }}">{% include "partials/couverture.html" with livre=livre %}</a>
+  <h3><a href="{% url 'livre_detail' livre.pk %}">{{ livre.titre }}</a></h3>
+  <p class="author">{{ livre.auteur }}</p>
+  {% if statut %}
+    {% if livre.publie %}<span class="badge badge-ok"><i class="bi bi-check-circle"></i> Publié</span>{% else %}<span class="badge badge-wait"><i class="bi bi-hourglass-split"></i> En attente</span>{% endif %}
+  {% endif %}
+  {% if action_lu %}
+  <form method="post" action="{% url 'livre_lu' livre.pk %}" class="card-foot">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="ajouter">
+    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+    <button type="submit" class="btn btn-outline btn-xs" title="Enregistrer dans mes livres lus"><i class="bi bi-bookmark-plus"></i> Enregistrer</button>
+  </form>
+  {% endif %}
+</div>

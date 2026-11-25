@@ -1,24 +1,29 @@
 <header class="site-header">
   <div class="header-inner">
-    <a href="{% url 'base' %}" class="logo">Kum<span>bu</span></a>
+    {% include "partials/logo.html" %}
 
     <nav class="main-nav" id="mainNav">
       <div class="nav-links">
-        <a href="{% url 'base' %}" class="nav-link {% if request.resolver_match.url_name == 'base' %}active{% endif %}">Accueil</a>
-        <a href="{% url 'propos' %}" class="nav-link {% if request.resolver_match.url_name == 'propos' %}active{% endif %}">À propos</a>
-        <a href="{% url 'recherche' %}" class="nav-link {% if request.resolver_match.url_name == 'recherche' %}active{% endif %}">Recherche</a>
-        <a href="{% url 'assistant' %}" class="nav-link {% if request.resolver_match.url_name == 'assistant' %}active{% endif %}">Assistant IA</a>
-        <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
-        <a href="{% url 'mon_profil' %}" class="nav-link {% if request.resolver_match.url_name == 'mon_profil' %}active{% endif %}">Mon profil</a>
+        <a href="{% url 'base' %}" class="nav-link {% if request.resolver_match.url_name == 'base' %}active{% endif %}"><i class="bi bi-house nav-ico"></i>Accueil</a>
+        <a href="{% url 'propos' %}" class="nav-link {% if request.resolver_match.url_name == 'propos' %}active{% endif %}"><i class="bi bi-info-circle nav-ico"></i>À propos</a>
+        <a href="{% url 'recherche' %}" class="nav-link {% if request.resolver_match.url_name == 'recherche' %}active{% endif %}"><i class="bi bi-search nav-ico"></i>Recherche</a>
+        <a href="{% url 'assistant' %}" class="nav-link {% if request.resolver_match.url_name == 'assistant' %}active{% endif %}"><i class="bi bi-robot nav-ico"></i>Assistant IA</a>
+        <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"><i class="bi bi-envelope nav-ico"></i>Contact</a>
+        <a href="{% url 'mon_profil' %}" class="nav-link {% if 'profil' in request.resolver_match.url_name or request.resolver_match.url_name == 'livres_publies' or request.resolver_match.url_name == 'livres_lus' or request.resolver_match.url_name == 'publiLivre' or request.resolver_match.url_name == 'parametres' %}active{% endif %}"><i class="bi bi-person-circle nav-ico"></i>Mon profil</a>
       </div>
       <div class="nav-utils">
         {% include "partials/theme_swicth.html" %}
-        <a href="{% url 'deconnexion' %}" class="btn btn-primary">Déconnexion</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'mon_profil' %}" class="nav-profile-link" aria-label="Mon profil">{% include "partials/avatar.html" with profil=user.profil taille="md" %}</a>
+          <a href="{% url 'deconnexion' %}" class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Déconnexion</a>
+        {% else %}
+          <a href="{% url 'connexion' %}" class="btn btn-primary"><i class="bi bi-box-arrow-in-right"></i> Connexion</a>
+        {% endif %}
       </div>
     </nav>
 
     <button class="hamburger" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" type="button">
-      <span></span><span></span><span></span>
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
   </div>
 </header>

@@ -1,0 +1,53 @@
+{% extends "home.html" %}
+{% block title %}Paramètres | kumbu{% endblock %}
+{% block content %}
+  <section class="page">
+    {% include "mon_profil/_entete.html" %}
+    <div class="container" style="padding-bottom:24px">
+      <div class="settings-grid">
+
+        <div class="card">
+          <h3 class="card-title"><i class="bi bi-person-gear"></i> Profil</h3>
+          <p>Modifiez votre nom, votre photo, votre biographie et votre parcours académique.</p>
+          <a href="{% url 'modifier_profil' %}" class="btn btn-outline"><i class="bi bi-pencil-square"></i> Modifier le profil</a>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title"><i class="bi bi-key"></i> Mot de passe</h3>
+          <p>Choisissez un mot de passe solide que vous n'utilisez pas ailleurs.</p>
+          {% if form.errors %}
+            <div class="alert alert-error"><i class="bi bi-exclamation-circle"></i><ul>{% for f in form %}{% for e in f.errors %}<li>{{ e }}</li>{% endfor %}{% endfor %}{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}</ul></div>
+          {% endif %}
+          <form method="post" action="{% url 'parametres' %}" style="max-width:460px">
+            {% csrf_token %}
+            <div class="field"><label for="{{ form.old_password.id_for_label }}">Mot de passe actuel</label>{{ form.old_password }}</div>
+            <div class="field"><label for="{{ form.new_password1.id_for_label }}">Nouveau mot de passe</label>{{ form.new_password1 }}</div>
+            <div class="field"><label for="{{ form.new_password2.id_for_label }}">Confirmer le nouveau mot de passe</label>{{ form.new_password2 }}</div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> Changer le mot de passe</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title"><i class="bi bi-circle-half"></i> Thème</h3>
+          <p>Basculer entre le thème clair et le thème sombre de l'application.</p>
+          <div class="theme-choices">
+            <button type="button" class="btn btn-outline" data-set-theme="light"><i class="bi bi-sun"></i> Clair</button>
+            <button type="button" class="btn btn-outline" data-set-theme="dark"><i class="bi bi-moon-stars"></i> Sombre</button>
+            <button type="button" class="btn btn-outline" data-set-theme="auto"><i class="bi bi-circle-half"></i> Automatique</button>
+          </div>
+        </div>
+
+        <div class="card card-danger">
+          <h3 class="card-title"><i class="bi bi-exclamation-triangle"></i> Supprimer mon compte</h3>
+          <p>Cette action est définitive : votre profil, vos actualités et votre historique de lecture seront effacés.</p>
+          <form method="post" action="{% url 'supprimer_compte' %}" style="max-width:460px" onsubmit="return confirm('Supprimer définitivement votre compte ?');">
+            {% csrf_token %}
+            <div class="field"><label for="del-mdp">Confirmez avec votre mot de passe</label><input id="del-mdp" type="password" name="mot_de_passe" required autocomplete="current-password"></div>
+            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Supprimer mon compte</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+{% endblock %}

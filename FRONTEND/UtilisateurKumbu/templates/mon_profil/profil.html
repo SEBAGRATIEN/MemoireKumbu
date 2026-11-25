@@ -1,40 +1,64 @@
 {% extends "home.html" %}
-{% block title %}Mon profil | kumbu{% endblock  %}  
+{% block title %}Mon profil | kumbu{% endblock  %}
 {% block content %}
   <section id="page-profil" class="page">
+    {% include "mon_profil/_entete.html" %}
+
     <div class="container">
-      <div class="profile-header">
-        <div class="avatar-lg">NH</div>
-        <div>
-          <h2 style="margin-bottom:4px">Nzayituriki Habyarimana Gracieux</h2>
-          <p style="margin:0">Étudiant — L1 Réseaux et télécommunications</p>
-        </div>
-        <a href="#" class="btn btn-outline" style="margin-left:auto">Modifier le profil</a>
-      </div>
+      <div class="profile-layout">
+        <aside class="profile-side">
+          {% include "mon_profil/_apropos.html" %}
+        </aside>
 
-      <div class="section" style="padding-bottom:0">
-        <div class="tabs-secondary">
-          <span class="active">Informations</span>
-          <span>Mes livres publiés</span>
-          <span>Livres lus</span>
-          <span>Paramètres</span>
-        </div>
+        <div class="profile-main">
 
-        <div class="grid grid-3" style="margin-bottom:40px">
-          <div class="card">
-            <h3>Identité</h3>
-            <p>Nom, post-nom, prénom, photo de profil — modifiables depuis cet onglet.</p>
+          <!-- Zone de publication -->
+          <form class="card composer" method="post" enctype="multipart/form-data" action="{% url 'mon_profil' %}">
+            {% csrf_token %}
+            {% if form.errors %}
+              <div class="alert alert-error"><i class="bi bi-exclamation-circle"></i><ul>{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}{% for f in form %}{% for e in f.errors %}<li>{{ e }}</li>{% endfor %}{% endfor %}</ul></div>
+            {% endif %}
+            <div class="composer-row">
+              {% include "partials/avatar.html" with profil=profil taille="md" %}
+              {{ form.texte }}
+            </div>
+            <div class="composer-preview" id="pubBox">
+              <img id="pubPreview" src="" alt="Aperçu de l'image">
+            </div>
+            <div class="composer-bar">
+              <label class="file-btn"><i class="bi bi-image"></i> Photo {{ form.image }}</label>
+              <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Publier</button>
+            </div>
+          </form>
+
+          <!-- Fil d'actualités -->
+          {% for pub in publications %}
+          <article class="card post">
+            <div class="post-head">
+              {% include "partials/avatar.html" with profil=profil taille="sm" %}
+              <div class="who">
+                <b>{{ profil.nom_complet }}{% if pub.type == 'photo_profil' %} <span>a mis à jour sa photo de profil</span>{% endif %}</b>
+                <small>{{ pub.date_creation|date:"d F Y à H:i" }}</small>
+              </div>
+              <form method="post" action="{% url 'supprimer_publication' pub.pk %}" onsubmit="return confirm('Supprimer cette publication ?');">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-ghost btn-sm" aria-label="Supprimer la publication"><i class="bi bi-trash"></i></button>
+              </form>
+            </div>
+            {% if pub.texte %}<p class="post-text">{{ pub.texte }}</p>{% endif %}
+            {% if pub.image %}
+              <button type="button" class="post-image{% if pub.type == 'photo_profil' %} is-avatar{% endif %}" data-lightbox="{{ pub.image.url }}" aria-label="Voir l'image en entier"><img src="{{ pub.image.url }}" alt="" loading="lazy"></button>
+            {% endif %}
+          </article>
+          {% empty %}
+          <div class="card empty-state">
+            <span class="empty-icon"><i class="bi bi-newspaper"></i></span>
+            <h3>Aucune actualité</h3>
+            <p>Partagez votre première publication ou changez votre photo de profil : elle apparaîtra ici.</p>
           </div>
-          <div class="card">
-            <h3>Mot de passe</h3>
-            <p>Modifier le mot de passe associé au compte.</p>
-          </div>
-          <div class="card">
-            <h3>Thème</h3>
-            <p>Basculer entre le thème clair et le thème sombre de l'application.</p>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
   </section>
-{% endblock  %}  
+{% endblock  %}

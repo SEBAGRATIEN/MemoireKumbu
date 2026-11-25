@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib import admin
-from .models import Profil, Categorie, Livre, LivreLu, LivreSauvegarde, Question, Reponse, RessourceApprentissage, MessageContact, Etablissement, Promotion, MembrePromotion, SupportPromotion
+from .models import Profil, Categorie, Livre, Publication, LivreLu, LivreSauvegarde, Question, Reponse, RessourceApprentissage, MessageContact, Etablissement, Promotion, MembrePromotion, SupportPromotion
 
 # Register your models here.
 admin.site_header = "ADMINISTRATION KUMBU"
@@ -36,6 +36,12 @@ class LivreLuAdmin(admin.ModelAdmin):
     list_display = ("utilisateur", "livre", "progression", "termine", "derniere_lecture",)
     search_fields = ("utilisateur__username", "livre__titre",)
     list_filter = ("termine", "derniere_lecture",)
+
+@admin.register(Publication)
+class PubliationAdmin(admin.ModelAdmin):
+    list_display = ("auteur", "type", "texte", "date_creation",)
+    search_fields = ("auteur", "type",)
+    list_filter = ("auteur", "type",)
 
 @admin.register(LivreSauvegarde)
 class LivreSauvegardeAdmin(admin.ModelAdmin):
